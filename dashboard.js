@@ -1,50 +1,39 @@
 let tasks = []; // Will hold all tasks in memory
 
+// 🔗 Modal Elements
+const modal = document.getElementById("task-modal");
+const closeModalBtn = document.getElementById("close-modal");
+const taskForm = document.getElementById("task-form");
+const taskInput = document.getElementById("task-input");
+const prioritySelect = document.getElementById("priority-select");
+const dueDateInput = document.getElementById("due-date");
+const hiddenColumnInput = document.getElementById("task-column");
+
+// 🔘 Show modal
+function openModal(columnId) {
+  modal.style.display = "block";
+  hiddenColumnInput.value = columnId; // Pass column ID to hidden input
+}
+
+// ❌ Close modal
+closeModalBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+  taskForm.reset();
+});
+
 // 🧠 Select all "Add Task" buttons
 const addTaskButtons = document.querySelectorAll(".add-task-btn");
 
-// Loop through each button and add click event
+// ✅ Attach click event to each button to open modal
 addTaskButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const column = button.previousElementSibling; // Get the correct task-list div
-    const taskText = prompt("Enter task name:");
-
-    if (taskText) {
-      // Create the task card
-      const taskCard = document.createElement("div");
-      taskCard.classList.add("task-card");
-      taskCard.setAttribute("draggable", "true");
-      taskCard.innerHTML = `<p>${taskText}</p>`;
-
-      // Append to the correct list
-      column.appendChild(taskCard);
-
-      // Add drag behavior
-      taskCard.addEventListener("dragstart", () => {
-        taskCard.classList.add("dragging");
-      });
-
-      taskCard.addEventListener("dragend", () => {
-        taskCard.classList.remove("dragging");
-        updateTaskColumn(taskText, taskCard.parentElement.id); // ✅ Save updated column
-      });
-
-      // Determine column name (e.g., "todo", "inprogress", "done")
-      const columnId = column.id.replace("-list", "");
-
-      // Add task to memory array
-      tasks.push({
-        text: taskText,
-        column: columnId,
-      });
-
-      // Save to localStorage
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
+    const column = button.previousElementSibling;
+    const columnId = column.id.replace("-list", "");
+    openModal(columnId); // Only open modal now
   });
 });
 
-// ✅ Load tasks on page load
+// ✅ Load tasks from localStorage on page load
 function loadTasks() {
   const stored = localStorage.getItem("tasks");
   if (stored) {
@@ -55,8 +44,15 @@ function loadTasks() {
       const taskCard = document.createElement("div");
       taskCard.classList.add("task-card");
       taskCard.setAttribute("draggable", "true");
-      taskCard.innerHTML = `<p>${task.text}</p>`;
 
+      // Build task card content
+      taskCard.innerHTML = `
+        <p>${task.text}</p>
+        <small>Priority: ${task.priority || "medium"}</small><br/>
+        ${task.dueDate ? `<small>Due: ${task.dueDate}</small>` : ""}
+      `;
+
+      // Drag behavior
       taskCard.addEventListener("dragstart", () => {
         taskCard.classList.add("dragging");
       });
@@ -73,12 +69,57 @@ function loadTasks() {
 
 loadTasks(); // 👈 Run this on page load
 
-// ✅ Update task's column when it's dropped
+// ✅ Handle form submission to create new task
+taskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const taskText = taskInput.value.trim();
+  const priority = prioritySelect.value;
+  const dueDate = dueDateInput.value;
+  const columnId = hiddenColumnInput.value;
+
+  if (taskText) {
+    const column = document.getElementById(`${columnId}-list`);
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("task-card");
+    taskCard.setAttribute("draggable", "true");
+
+    // Build card content
+    taskCard.innerHTML = `
+      <p>${taskText}</p>
+      <small>Priority: ${priority}</small><br/>
+      ${dueDate ? `<small>Due: ${dueDate}</small>` : ""}
+    `;
+
+    column.appendChild(taskCard);
+
+    // Drag behavior
+    taskCard.addEventListener("dragstart", () => {
+      taskCard.classList.add("dragging");
+    });
+
+    taskCard.addEventListener("dragend", () => {
+      taskCard.classList.remove("dragging");
+      updateTaskColumn(taskText, taskCard.parentElement.id);
+    });
+
+    // Save task to memory
+    tasks.push({ text: taskText, column: columnId, priority, dueDate });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  // Reset form + close modal
+  taskForm.reset();
+  modal.style.display = "none";
+});
+
+// ✅ Update task's column when dropped into new list
 function updateTaskColumn(taskText, newColumnId) {
-  const column = newColumnId.replace("-list", ""); // Remove '-list' suffix
+  const column = newColumnId.replace("-list", "");
+
   tasks = tasks.map((task) => {
     if (task.text === taskText) {
-      return { ...task, column: column };
+      return { ...task, column };
     }
     return task;
   });
@@ -86,7 +127,7 @@ function updateTaskColumn(taskText, newColumnId) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// ✅ Set up dragover listeners for each task list (only once)
+// ✅ Allow each task list to accept dropped tasks
 const taskLists = document.querySelectorAll(".task-list");
 
 taskLists.forEach((list) => {
