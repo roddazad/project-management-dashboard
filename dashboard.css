@@ -1,0 +1,67 @@
+/* 🌐 Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+  }
+  
+  /* 🧠 Header Styling */
+  .dashboard-header {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  /* 🗂 Task Board Layout */
+  .task-board {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  /* 📋 Task Columns */
+  .task-column {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 300px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .task-column h2 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+  
+  /* 📝 Task List (container for cards) */
+  .task-list {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+  }
+  
+  /* ➕ Add Task Button */
+  .add-task-btn {
+    padding: 0.5rem;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-task-btn:hover {
+    background-color: #1a252f;
+  }

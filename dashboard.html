@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow | Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- 🧠 Dashboard Header -->
+  <header class="dashboard-header">
+    <h1>My Board</h1>
+  </header>
+
+  <!-- 🗂 Task Board Section -->
+  <section class="task-board">
+    <!-- 📋 To Do Column -->
+    <div class="task-column" id="todo-column">
+      <h2>To Do</h2>
+      <div class="task-list" id="todo-list">
+        <!-- Tasks will go here -->
+      </div>
+      <button class="add-task-btn">+ Add Task</button>
+    </div>
+
+    <!-- 🚧 In Progress Column -->
+    <div class="task-column" id="inprogress-column">
+      <h2>In Progress</h2>
+      <div class="task-list" id="inprogress-list">
+        <!-- Tasks will go here -->
+      </div>
+      <button class="add-task-btn">+ Add Task</button>
+    </div>
+
+    <!-- ✅ Done Column -->
+    <div class="task-column" id="done-column">
+      <h2>Done</h2>
+      <div class="task-list" id="done-list">
+        <!-- Tasks will go here -->
+      </div>
+      <button class="add-task-btn">+ Add Task</button>
+    </div>
+  </section>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
