@@ -1,3 +1,5 @@
+let tasks = []; //Will hold all tasks in memory
+
 // 🧠 Select all "Add Task" buttons
 const addTaskButtons = document.querySelectorAll(".add-task-btn");
 
@@ -27,6 +29,17 @@ addTaskButtons.forEach((button) => {
       taskCard.addEventListener("dragend", () => {
         taskCard.classList.remove("dragging");
       });
+      // Determine column name
+        const columnId = column.id.replace("-list", ""); // "todo", "inprogress", "done"
+
+        // Add task to memory array
+        tasks.push({
+        text: taskText,
+        column: columnId,
+        });
+
+        // Save to localStorage
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }
           // 🧲 Allow each task list to accept drops
 const taskLists = document.querySelectorAll(".task-list");
