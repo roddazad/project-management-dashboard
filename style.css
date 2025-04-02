@@ -237,19 +237,65 @@
     background-color: #1a252f;
   }
 
-  /* 🧾 Footer Styling */
-.footer {
-    background-color: #2c3e50;
-    padding: 1rem;
-    color: #ffffff;
-    text-align: center;
-    font-size: 0.9rem;
-  }
   
-  .footer-container {
-    max-width: 1200px;
-    margin: auto;
-  }
+/* 🦶 Footer Styling */
+.dashboard-footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: 3rem;
+  border-top: 2px solid #1a252f;
+  font-size: 0.9rem;
+}
+
+.footer-content {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.dashboard-footer .brand {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-footer .brand span {
+  font-weight: normal;
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.footer-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+  color: #3498db;
+}
+
+.dashboard-footer p {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: #bdc3c7;
+}
+.footer-links a:hover {
+  color: #1abc9c;
+  transform: scale(1.1);
+  transition: color 0.3s ease, transform 0.2s ease;
+}
 
   
   @media (max-width: 768px) {
