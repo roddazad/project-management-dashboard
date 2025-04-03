@@ -9,9 +9,22 @@
 <body>
 
   <!-- 🧠 Dashboard Header -->
-  <header class="dashboard-header">
-    <h1>My Board</h1>
-  </header>
+<header class="dashboard-header">
+  <div class="header-container">
+    <!-- Brand/Logo -->
+    <h1>TaskFlow</h1>
+
+    <!-- Navigation Menu -->
+    <nav class="dashboard-nav">
+      <a href="index.html" class="nav-link home-btn">Home</a>
+      <a href="index.html#contact" class="nav-link contact-btn">Contact</a>
+      <!-- Display the logged-in user's name -->
+      <span class="user-info"></span>
+      <!-- Logout Button -->
+      <button id="logout-btn" class="logout-btn">Logout</button>
+    </nav>
+  </div>
+</header>
 
   <!-- 🗂 Task Board Section -->
   <section class="task-board">

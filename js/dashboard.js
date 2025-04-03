@@ -9,6 +9,28 @@ const prioritySelect = document.getElementById("priority-select");
 const dueDateInput = document.getElementById("due-date");
 const hiddenColumnInput = document.getElementById("task-column");
 
+// Display logged-in user's name and handle logout
+document.addEventListener("DOMContentLoaded", () => {
+  const userInfo = document.querySelector(".user-info");
+  const logoutBtn = document.getElementById("logout-btn");
+
+  // Retrieve currentUser from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (currentUser) {
+    userInfo.innerText = `Welcome, ${currentUser.name}`;
+  } else {
+    // If no user is logged in, you might choose to redirect to the login page
+    // window.location.href = "login.html";
+  }
+
+  // Logout logic
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("currentUser");
+    window.location.href = "login.html";
+  });
+});
+
 // 🔘 Show modal
 function openModal(columnId) {
   modal.classList.add("show");
