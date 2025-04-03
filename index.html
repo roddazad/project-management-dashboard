@@ -6,7 +6,7 @@
   <title>TaskFlow</title>
 
   <!-- Link to external CSS (you’ll create style.css next) -->
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
       <!--  Navbar Section -->
@@ -89,16 +89,16 @@
       <h2>Contact Us</h2>
       <p>Have questions, ideas, or just want to say hi? We'd love to hear from you.</p>
 
-      <form class="contact-form">
+      <form action="https://formspree.io/f/mpwpydbw" method="POST" class="contact-form">
         <!-- Name Field -->
-        <input type="text" placeholder="Your Name" required />
-
+        <input type="text" name="name" placeholder="Your Name" required />
+      
         <!-- Email Field -->
-        <input type="email" placeholder="Your Email" required />
-
+        <input type="email" name="email" placeholder="Your Email" required />
+      
         <!-- Message Field -->
-        <textarea rows="5" placeholder="Your Message" required></textarea>
-
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      
         <!-- Submit Button -->
         <button type="submit">Send Message</button>
       </form>
